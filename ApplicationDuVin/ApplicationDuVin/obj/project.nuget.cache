@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "gAhbCj2AvMGIfWbpE6CVgvzEKPxyUrmDAsGisAekfA3jtrfT6IlT16mnP1b8kYDRUMvqENEVoS8e6SBq88zekA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\abder\\Desktop\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\abder\\.nuget\\packages\\csvhelper\\31.0.2\\csvhelper.31.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
