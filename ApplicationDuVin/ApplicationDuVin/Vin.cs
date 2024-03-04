@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Globalization;
 using System.IO;
 using CsvHelper;
+using CsvHelper.Configuration.Attributes;
+using CsvHelper.Configuration;
 
 namespace ApplicationDuVin
 {
@@ -13,22 +15,33 @@ namespace ApplicationDuVin
     {
         public double alcohol { get; set; }
         public double sulphates { get; set; }
-        public double citricAcid { get; set; }
-        public double volatileAcidity { get; set; }
+
+        [Name("citric acid")]
+        public double citricacid { get; set; }
+        [Name("volatile acidity")]
+        public double volatileacidity { get; set; }
         public int quality { get; set; }
         public Vin(double alcohol, double sulphates, double citricAcid, double volatileAcidity, int quality)
         {
             this.alcohol = alcohol;
             this.sulphates = sulphates;
-            this.citricAcid = citricAcid;
-            this.volatileAcidity = volatileAcidity;
+            this.citricacid = citricAcid;
+            this.volatileacidity = volatileAcidity;
             this.quality = quality;
+        }
+        public Vin()
+        {
         }
 
         public static List<Vin> ImporterDonneesCSV<Vin>(string cheminFichierCsv)
         {
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = ";",
+                HasHeaderRecord = true
+            };
             using (var reader = new StreamReader(cheminFichierCsv))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            using (var csv = new CsvReader(reader, config))
             {
                 return csv.GetRecords<Vin>().ToList();
             }
@@ -43,9 +56,9 @@ namespace ApplicationDuVin
                 case 1:
                     return sulphates;
                 case 2:
-                    return citricAcid;
+                    return citricacid;
                 case 3:
-                    return volatileAcidity;
+                    return volatileacidity;
                 case 4:
                     return quality;
                 default:

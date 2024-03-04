@@ -1,8 +1,12 @@
-﻿using System;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using CsvHelper;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using ApplicationDuVin;
 
 
 
@@ -35,16 +39,16 @@ namespace ApplicationDuVin
             */
 
 
-            string cheminFichierCsv = "C:/Users/bahlo/Desktop/TP 01 POO/Données - Qualité du Vin/train_reduced - Copy.csv";
-
+            string cheminFichierCsv = @"DONNE/train_reduced.csv";
+  
             // Lecture des données du fichier CSV dans une liste de Vins
             List<Vin> vins = Vin.ImporterDonneesCSV<Vin>(cheminFichierCsv);
 
             // Affichage des données(juste pour la verification)
-            /*foreach (Vin vin in vins)
+            foreach (Vin vin in vins)
             {
-                Console.WriteLine($"Alcohol: {vin.alcohol}, Sulphates: {vin.sulphates}, Critic Acid: {vin.citricAcid}, Quality: {vin.quality}");
-            }*/
+                Console.WriteLine($"Alcohol: {vin.alcohol}, Sulphates: {vin.sulphates}, Critic Acid: {vin.citricacid}, Quality: {vin.quality}");
+            }
             ArbreDeDecision arbreDeDecision = new ArbreDeDecision();
             //entropy
             Console.WriteLine(arbreDeDecision.CalculateEntropyList(vins));

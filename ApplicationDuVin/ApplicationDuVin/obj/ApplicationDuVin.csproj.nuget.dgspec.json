@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\abder\\Desktop\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj": {}
+    "C:\\Users\\abder\\Documents\\GitHub\\Projet-POO-V2\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abder\\Desktop\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj": {
+    "C:\\Users\\abder\\Documents\\GitHub\\Projet-POO-V2\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abder\\Desktop\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj",
+        "projectUniqueName": "C:\\Users\\abder\\Documents\\GitHub\\Projet-POO-V2\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj",
         "projectName": "ApplicationDuVin",
-        "projectPath": "C:\\Users\\abder\\Desktop\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj",
+        "projectPath": "C:\\Users\\abder\\Documents\\GitHub\\Projet-POO-V2\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin.csproj",
         "packagesPath": "C:\\Users\\abder\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abder\\Desktop\\ApplicationDuVin\\ApplicationDuVin\\ApplicationDuVin\\obj\\",
+        "outputPath": "C:\\Users\\abder\\Documents\\GitHub\\Projet-POO-V2\\ApplicationDuVin\\ApplicationDuVin\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

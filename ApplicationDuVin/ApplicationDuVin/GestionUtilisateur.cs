@@ -67,7 +67,7 @@ namespace ApplicationDuVin
             {
                 oenologue.AfficherDetails();
             }
-
+            
             Console.WriteLine("\nPropriétaires de Vignoble:");
             foreach (var proprietaire in proprietairesVignoble)
             {

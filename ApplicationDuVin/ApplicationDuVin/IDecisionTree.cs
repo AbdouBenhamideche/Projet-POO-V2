@@ -9,7 +9,7 @@ using System.Xml.Linq;
 {
         internal interface IDecisionTree
         {
-            Node BuildTree(List<Vin > data, List<string> attributes);
+            //Node BuildTree(List<Vin > data, List<string> attributes);
             string Classify(string[] instance);
             string Classify(string[] instance, Node node);
             string GetBestAttribute(List<Vin> data, List<string> attributes, out double? splitValue);

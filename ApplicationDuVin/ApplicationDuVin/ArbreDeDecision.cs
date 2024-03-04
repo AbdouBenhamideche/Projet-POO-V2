@@ -8,7 +8,7 @@ namespace ApplicationDuVin
 {
     public class ArbreDeDecision : IDecisionTree
     {
-        public Node BuildTree(List<Vin> data, List<string> attributes)
+        /*public Node BuildTree(List<Vin> data, List<string> attributes)
         {
             // Implémentez la logique de construction de l'arbre de décision ici
             // Utilisez les méthodes auxiliaires pour les calculs nécessaires
@@ -57,7 +57,7 @@ namespace ApplicationDuVin
             node.RightChild = BuildTree(rightData, attributes.Except(new List<string> { bestAttribute }).ToList());
 
             return node;
-        }
+        }*/
 
         public string Classify(string[] instance)
         {
