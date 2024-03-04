@@ -78,9 +78,9 @@ namespace ApplicationDuVin
                     return 0;
                 case "sulphates":
                     return 1;
-                case "citricAcid":
+                case "citric acid":
                     return 2;
-                case "volatileAcidity":
+                case "volatile acidity":
                     return 3;
                 default:
                     return -1;
