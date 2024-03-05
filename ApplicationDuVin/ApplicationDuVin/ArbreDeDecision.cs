@@ -18,18 +18,15 @@ namespace ApplicationDuVin
             
             if (data.All(d => d.quality == data.First().quality)) //Cette condition vérifie si tous les vins dans l'ensemble de données ont la même qualité. Si c'est le cas, cela signifie que tous les vins ont la même classe, donc nous retournons un nœud feuille avec cette classe comme prédiction
             {
-                
-                return new Node { Class = data.First().quality.ToString() };
+                Console.WriteLine("same class");
+                return new Node { Class = data.First().quality };
             }
 
             if (attributes.Count == 0)//Cette condition vérifie s'il ne reste plus d'attributs à diviser. Si c'est le cas, cela signifie que nous avons épuisé tous les attributs disponibles pour diviser les données, donc nous retournons un nœud feuille avec la classe majoritaire comme prédiction.
             {
-                string majorityClass = data.GroupBy(d => d.quality)
-                                           .OrderByDescending(g => g.Count())
-                                           .First()
-                                           .Key
-                                           .ToString();
-                return new Node { Class = majorityClass };
+                Console.WriteLine("fin");
+                
+                return new Node { Class = GetMostCommonClass(data) };
             }
 
             string bestAttribute = GetBestAttribute(data, attributes, out double? splitValue);//Cette ligne appelle une méthode GetBestAttribute pour obtenir le meilleur attribut pour diviser les données

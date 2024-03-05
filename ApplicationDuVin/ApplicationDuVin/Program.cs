@@ -76,15 +76,35 @@ namespace ApplicationDuVin
 
 
             //faire l'arbre
-            arbreDeDecision.BuildTree(vins, attributes);
+            Node root;
+             root = arbreDeDecision.BuildTree(vins, attributes);
 
 
+            void PrintTree(Node node, string indent = "")
+            {
+                if (node == null)
+                    return;
 
+                if (node.Attribute != null)
+                {
+                    Console.WriteLine(indent + node.Attribute + ":");
+                    foreach (var child in node.Children)
+                    {
+                        Console.WriteLine(indent + "|_" + child.Key);
+                        PrintTree(child.Value, indent + "|  ");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(indent + "Class: " + node.Class);
+                }
+            }
+            PrintTree(root, "");
             //lire l arbre
 
-            
-            
-            
+
+
+
 
 
 

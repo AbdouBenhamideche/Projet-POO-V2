@@ -11,21 +11,16 @@ namespace ApplicationDuVin
     {
         public string Attribute { get; set; }
         public Dictionary<string, Node> Children { get; set; }
-        public string Class { get; set; }  
+        public int Class { get; set; }  
         public double? SplitValue { get; set; }
 
-        public Node()
-        {
-            Attribute = null;
-            Children = new Dictionary<string, Node>();
-            Class = null;
-            SplitValue = null;
-        }
+
 
         public void SplitDataNumeric(List<Vin> data, string attribute, double splitValue, out List<Vin> leftSubset, out List<Vin> rightSubset)
         {
             
             Console.WriteLine(splitValue.ToString() + " est la valeur de separation");
+            
             leftSubset = new List<Vin>();
             rightSubset = new List<Vin>();
 
