@@ -45,13 +45,18 @@ namespace ApplicationDuVin
             List<Vin> vins = Vin.ImporterDonneesCSV<Vin>(cheminFichierCsv);
 
             // Affichage des données(juste pour la verification)
-            foreach (Vin vin in vins)
+          /*  foreach (Vin vin in vins)
             {
                 Console.WriteLine($"Alcohol: {vin.alcohol}, Sulphates: {vin.sulphates}, Critic Acid: {vin.citricacid}, Quality: {vin.quality}");
-            }
+            }*/
             ArbreDeDecision arbreDeDecision = new ArbreDeDecision();
+            
+            
             //entropy
             Console.WriteLine(arbreDeDecision.CalculateEntropyList(vins));
+
+
+
             //gain
             for (int i = 0; i < 4; i++) {
                 Console.WriteLine(arbreDeDecision.CalculateInformationGain(vins,  i));
@@ -69,14 +74,20 @@ namespace ApplicationDuVin
 
 
             //test pour GetBestAttribute
-            List<string> attributes = new List<string>() { "alcohol", "sulphates", "citricAcid", "quality" };
-            Console.WriteLine(arbreDeDecision.GetBestAttribute(vins, attributes, out double? splitValue));
+            List<string> attributes = new List<string>() {"alcohol", "sulphates", "citric acid", "volatile acidity", "quality" };
 
+            Console.WriteLine(arbreDeDecision.GetBestAttribute(vins, attributes, out double? splitValue));
 
 
             //test
             Console.WriteLine(arbreDeDecision.GetMostCommonClass(vins));
 
+            Console.WriteLine();
+            Console.WriteLine(vins.First().alcohol);
+            //faire l'arbre
+            arbreDeDecision.BuildTree(vins, attributes);
+            
+            
 
 
 

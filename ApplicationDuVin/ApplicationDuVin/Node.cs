@@ -16,34 +16,30 @@ namespace ApplicationDuVin
 
 
 
-        public (List<Vin> leftData, List<Vin> rightData) SplitDataNumeric(List<Vin> data, int attributeIndex, double splitValue)
-        {
-            List<Vin> leftData = new List<Vin>();
-            List<Vin> rightData = new List<Vin>();
 
-            foreach (Vin vin in data)
-            {
-                double attributeValue = vin.GetAttributeValue(attributeIndex);
-
-                if (attributeValue <= splitValue)
-                {
-                    leftData.Add(vin);
-                }
-                else
-                {
-                    rightData.Add(vin);
-                }
-            }
-
-            return (leftData, rightData);
-        }
 
         // Méthode pour diviser les données catégoriques
 
 
+        public void SplitDataNumeric(List<Vin> data, string attribute, double splitValue, out List<Vin> leftSubset, out List<Vin> rightSubset)
+        {
+            leftSubset= new List<Vin>();
+            Console.WriteLine(0);
+            
+            leftSubset = data.Where(d => Convert.ToDouble(d.GetType().GetProperty(attribute).GetValue(d)) <= splitValue).ToList();
+            
+            rightSubset = data.Where(d => Convert.ToDouble(d.GetType().GetProperty(attribute).GetValue(d)) > splitValue).ToList();
+        }
 
-
-
+        public void SplitDataCategorical(List<Vin> data, string attribute, out Dictionary<string, List<Vin>> subsets)
+        {
+            subsets = new Dictionary<string, List<Vin>>();
+            var attributeValues = data.Select(d => d.GetType().GetProperty(attribute).GetValue(d).ToString()).Distinct();
+            foreach (var value in attributeValues)
+            {
+                subsets.Add(value, data.Where(d => d.GetType().GetProperty(attribute).GetValue(d).ToString() == value).ToList());
+            }
+        }
     }
 }
  

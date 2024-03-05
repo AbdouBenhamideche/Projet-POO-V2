@@ -13,13 +13,16 @@ namespace ApplicationDuVin
 {
     public class Vin
     {
+        [Name("alcohol")]
         public double alcohol { get; set; }
+        [Name("sulphates")]
         public double sulphates { get; set; }
 
         [Name("citric acid")]
         public double citricacid { get; set; }
         [Name("volatile acidity")]
         public double volatileacidity { get; set; }
+        [Name("quality")]
         public int quality { get; set; }
         public Vin(double alcohol, double sulphates, double citricAcid, double volatileAcidity, int quality)
         {

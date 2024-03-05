@@ -7,57 +7,53 @@ using System.Threading.Tasks;
 namespace ApplicationDuVin
 {
     public class ArbreDeDecision : IDecisionTree
+        
     {
-        /*public Node BuildTree(List<Vin> data, List<string> attributes)
+
+   
+        
+        public Node BuildTree(List<Vin> data, List<string> attributes)
         {
-            // Implémentez la logique de construction de l'arbre de décision ici
-            // Utilisez les méthodes auxiliaires pour les calculs nécessaires
-            // Retournez le nœud racine de l'arbre
 
-            // Vérifiez s'il n'y a pas de données ou d'attributs
-            if (data == null || data.Count == 0 || attributes == null || attributes.Count == 0)
+            
+            Console.WriteLine(data.First().alcohol);
+            if (data.All(d => d.quality == data.First().quality))
             {
-                throw new ArgumentException("Invalid data or attributes.");
+                Console.WriteLine (data.First());
+                return new Node { Class = data.First().quality.ToString() };
             }
 
-            // Obtenez la classe la plus fréquente dans les données
-            int mostCommonClass = GetMostCommonClass(data);
-
-            // Si toutes les instances ont la même classe, créez une feuille avec cette classe
-            if (data.All(vin => vin.quality == mostCommonClass))
-            {
-                return new Node(true, mostCommonClass);
-            }
-
-            // Si aucun attribut n'est disponible, créez une feuille avec la classe majoritaire
             if (attributes.Count == 0)
             {
-                return new Node(true, mostCommonClass);
+                string majorityClass = data.GroupBy(d => d.quality)
+                                           .OrderByDescending(g => g.Count())
+                                           .First()
+                                           .Key
+                                           .ToString();
+                return new Node { Class = majorityClass };
             }
 
-            // Trouvez l'attribut qui donne le meilleur gain d'information
             string bestAttribute = GetBestAttribute(data, attributes, out double? splitValue);
 
-            // Créez un nouveau nœud avec l'attribut sélectionné
-            Node node = new Node(false, null, attributes.IndexOf(bestAttribute), splitValue);
+            Node node = new Node { Attribute = bestAttribute, Children = new Dictionary<string, Node>(), SplitValue = splitValue };
 
-            // Divisez les données en fonction de l'attribut sélectionné
-            List<Vin> leftData, rightData;
-            if (splitValue.HasValue && IsNumericAttribute(data, node.SplitAttributeIndex))
+            if (splitValue.HasValue)
             {
-                (leftData, rightData) = node.SplitDataNumeric(data, node.SplitAttributeIndex, splitValue.Value);
+                node.SplitDataNumeric(data, bestAttribute, splitValue.Value, out List<Vin> leftSubset, out List<Vin> rightSubset);
+                node.Children.Add("Left", BuildTree(leftSubset, attributes));
+                node.Children.Add("Right", BuildTree(rightSubset, attributes));
             }
             else
             {
-                (leftData, rightData) = SplitDataCategorical(data, node.SplitAttributeIndex);
+                node.SplitDataCategorical(data, bestAttribute, out Dictionary<string, List<Vin>> subsets);
+                foreach (var value in subsets.Keys)
+                {
+                    node.Children.Add(value, BuildTree(subsets[value], attributes));
+                }
             }
 
-            // Récursivement construisez les sous-arbres
-            node.LeftChild = BuildTree(leftData, attributes.Except(new List<string> { bestAttribute }).ToList());
-            node.RightChild = BuildTree(rightData, attributes.Except(new List<string> { bestAttribute }).ToList());
-
             return node;
-        }*/
+        }
 
         public string Classify(string[] instance)
         {
@@ -91,7 +87,7 @@ namespace ApplicationDuVin
                     {
                         maxInformationGain = informationGain;
                         bestAttribute = attribute;
-                        splitValue = currentSplitValue;
+                        splitValue = currentSplitValue; //donner la valeur de division 
                     }
                 }
                 else
@@ -264,7 +260,7 @@ namespace ApplicationDuVin
 
         public bool IsNumericAttribute(List<Vin> data, int attributeIndex)
         {
-            // Assuming that 0 to 3 indices represent numeric attributes and 4 is non-numeric (quality)
+            // En supposant que 0 à 3 indices représentent des attributs numériques et 4 est non numérique (qualité)
             if (attributeIndex >= 0 && attributeIndex <= 3)
             {
                 return true;
