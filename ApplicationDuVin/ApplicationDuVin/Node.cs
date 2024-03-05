@@ -24,8 +24,8 @@ namespace ApplicationDuVin
 
         public void SplitDataNumeric(List<Vin> data, string attribute, double splitValue, out List<Vin> leftSubset, out List<Vin> rightSubset)
         {
-            Console.WriteLine();
-            Console.WriteLine(splitValue.ToString() + " here");
+            
+            Console.WriteLine(splitValue.ToString() + " est la valeur de separation");
             leftSubset = new List<Vin>();
             rightSubset = new List<Vin>();
 

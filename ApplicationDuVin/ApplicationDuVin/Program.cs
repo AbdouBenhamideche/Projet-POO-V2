@@ -34,13 +34,13 @@ namespace ApplicationDuVin
             
             
             //entropy
-            Console.WriteLine(arbreDeDecision.CalculateEntropyList(vins));
+            Console.WriteLine("l'entropie"+arbreDeDecision.CalculateEntropyList(vins));
 
 
 
             //gain
             for (int i = 0; i < 4; i++) {
-                Console.WriteLine(arbreDeDecision.CalculateInformationGain(vins,  i));
+                Console.WriteLine("le gain" + arbreDeDecision.CalculateInformationGain(vins,  i));
             }
 
 
@@ -80,9 +80,9 @@ namespace ApplicationDuVin
 
 
 
-            //READ TREE
+            //lire l arbre
 
-            Console.WriteLine(arbreDeDecision.)
+            
             
             
 

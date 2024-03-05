@@ -9,17 +9,16 @@ namespace ApplicationDuVin
     public class ArbreDeDecision : IDecisionTree
         
     {
-
+        
    
         
         public Node BuildTree(List<Vin> data, List<string> attributes)
         {
 
             
-            Console.WriteLine(data.First().alcohol);
             if (data.All(d => d.quality == data.First().quality)) //Cette condition vérifie si tous les vins dans l'ensemble de données ont la même qualité. Si c'est le cas, cela signifie que tous les vins ont la même classe, donc nous retournons un nœud feuille avec cette classe comme prédiction
             {
-                Console.WriteLine (data.First());
+                
                 return new Node { Class = data.First().quality.ToString() };
             }
 
@@ -34,7 +33,7 @@ namespace ApplicationDuVin
             }
 
             string bestAttribute = GetBestAttribute(data, attributes, out double? splitValue);//Cette ligne appelle une méthode GetBestAttribute pour obtenir le meilleur attribut pour diviser les données
-            Console.WriteLine(bestAttribute);
+            Console.WriteLine("meilleur attribut : "+bestAttribute);
        
             Node node = new Node { Attribute = bestAttribute, Children = new Dictionary<string, Node>(), SplitValue = splitValue };//Cette ligne crée un nouveau nœud de l'arbre de décision avec l'attribut sélectionné, les enfants (qui seront remplis plus tard) et la valeur de division (pour les attributs numériques).
 
@@ -52,7 +51,7 @@ namespace ApplicationDuVin
             //        node.children.add(value, buildtree(subsets[value], attributes));
             //    }
             //}
-
+            Console.WriteLine();
             return node;
         }
 
