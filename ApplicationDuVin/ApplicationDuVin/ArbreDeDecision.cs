@@ -17,13 +17,13 @@ namespace ApplicationDuVin
 
             
             Console.WriteLine(data.First().alcohol);
-            if (data.All(d => d.quality == data.First().quality))
+            if (data.All(d => d.quality == data.First().quality)) //Cette condition vérifie si tous les vins dans l'ensemble de données ont la même qualité. Si c'est le cas, cela signifie que tous les vins ont la même classe, donc nous retournons un nœud feuille avec cette classe comme prédiction
             {
                 Console.WriteLine (data.First());
                 return new Node { Class = data.First().quality.ToString() };
             }
 
-            if (attributes.Count == 0)
+            if (attributes.Count == 0)//Cette condition vérifie s'il ne reste plus d'attributs à diviser. Si c'est le cas, cela signifie que nous avons épuisé tous les attributs disponibles pour diviser les données, donc nous retournons un nœud feuille avec la classe majoritaire comme prédiction.
             {
                 string majorityClass = data.GroupBy(d => d.quality)
                                            .OrderByDescending(g => g.Count())
@@ -33,9 +33,10 @@ namespace ApplicationDuVin
                 return new Node { Class = majorityClass };
             }
 
-            string bestAttribute = GetBestAttribute(data, attributes, out double? splitValue);
-
-            Node node = new Node { Attribute = bestAttribute, Children = new Dictionary<string, Node>(), SplitValue = splitValue };
+            string bestAttribute = GetBestAttribute(data, attributes, out double? splitValue);//Cette ligne appelle une méthode GetBestAttribute pour obtenir le meilleur attribut pour diviser les données
+            Console.WriteLine(bestAttribute);
+       
+            Node node = new Node { Attribute = bestAttribute, Children = new Dictionary<string, Node>(), SplitValue = splitValue };//Cette ligne crée un nouveau nœud de l'arbre de décision avec l'attribut sélectionné, les enfants (qui seront remplis plus tard) et la valeur de division (pour les attributs numériques).
 
             if (splitValue.HasValue)
             {
@@ -43,14 +44,14 @@ namespace ApplicationDuVin
                 node.Children.Add("Left", BuildTree(leftSubset, attributes));
                 node.Children.Add("Right", BuildTree(rightSubset, attributes));
             }
-            else
-            {
-                node.SplitDataCategorical(data, bestAttribute, out Dictionary<string, List<Vin>> subsets);
-                foreach (var value in subsets.Keys)
-                {
-                    node.Children.Add(value, BuildTree(subsets[value], attributes));
-                }
-            }
+            //else
+            //{
+            //    node.SplitDataCategorical(data, bestAttribute, out Dictionary<string, List<Vin>> subsets);
+            //    foreach (var value in subsets.Keys)
+            //    {
+            //        node.children.add(value, buildtree(subsets[value], attributes));
+            //    }
+            //}
 
             return node;
         }

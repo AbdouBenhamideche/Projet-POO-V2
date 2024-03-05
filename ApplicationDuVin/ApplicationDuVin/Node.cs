@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ApplicationDuVin
 {
@@ -10,36 +11,50 @@ namespace ApplicationDuVin
     {
         public string Attribute { get; set; }
         public Dictionary<string, Node> Children { get; set; }
-        public string Class { get; set; }
+        public string Class { get; set; }  
         public double? SplitValue { get; set; }
 
-
-
-
-
-
-        // Méthode pour diviser les données catégoriques
-
+        public Node()
+        {
+            Attribute = null;
+            Children = new Dictionary<string, Node>();
+            Class = null;
+            SplitValue = null;
+        }
 
         public void SplitDataNumeric(List<Vin> data, string attribute, double splitValue, out List<Vin> leftSubset, out List<Vin> rightSubset)
         {
-            leftSubset= new List<Vin>();
-            Console.WriteLine(0);
-            
-            leftSubset = data.Where(d => Convert.ToDouble(d.GetType().GetProperty(attribute).GetValue(d)) <= splitValue).ToList();
-            
-            rightSubset = data.Where(d => Convert.ToDouble(d.GetType().GetProperty(attribute).GetValue(d)) > splitValue).ToList();
-        }
+            Console.WriteLine();
+            Console.WriteLine(splitValue.ToString() + " here");
+            leftSubset = new List<Vin>();
+            rightSubset = new List<Vin>();
 
-        public void SplitDataCategorical(List<Vin> data, string attribute, out Dictionary<string, List<Vin>> subsets)
-        {
-            subsets = new Dictionary<string, List<Vin>>();
-            var attributeValues = data.Select(d => d.GetType().GetProperty(attribute).GetValue(d).ToString()).Distinct();
-            foreach (var value in attributeValues)
+            foreach (Vin vin in data)
             {
-                subsets.Add(value, data.Where(d => d.GetType().GetProperty(attribute).GetValue(d).ToString() == value).ToList());
+                int attributeIndex = Vin.GetAttributeIndex(attribute);
+                double attributeValue = vin.GetAttributeValue(attributeIndex);
+
+                // Si la valeur de l'attribut est inférieure ou égale au seuil, ajoutez le vin au sous-ensemble gauche
+                if (attributeValue <= splitValue)
+                {
+                    leftSubset.Add(vin);
+                }
+                // Sinon, ajoutez le vin au sous-ensemble droit
+                else
+                {
+                    rightSubset.Add(vin);
+                }
             }
         }
     }
+
+
+
+
+    // Méthode pour diviser les données catégoriques
+
+
+
+
 }
  
